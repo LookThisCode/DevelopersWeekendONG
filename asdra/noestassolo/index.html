@@ -1,66 +1,779 @@
-<!doctype html>
-<html>
-  <head>
-    <title>YouTube Direct Lite</title>
-    <link type="text/css" rel="stylesheet" href="css/index.css" />
-    <script type="text/javascript" src="js/third-party/lscache.js"></script>
-    <script type="text/javascript" src="js/third-party/parseUri.js"></script>
-    <script type="text/javascript" src="js/third-party/require-jquery.js" data-main="js/main"></script>
-  </head>
-  <body>
-    <div id="header" class="hidden login-required">
-      <img id="profile-picture"/>
-      <span id="display-name"></span>
-      <a id="logout" data-state="logout">Logout</a>
-    </div>
-    <div id="login-panel" class="hidden panel">
-      <div>Please <a id="login">login</a> to submit your video.</div>
-    </div>
-    <ul id="tabs" class="hidden login-required">
-      <li data-state="upload">Upload</li>
-      <li data-state="existing">My YouTube Videos</li>
-      <li data-state="webcam">Webcam</li>
-    </ul>
-    <div id="message" class="hidden"></div>
-    <div id="existing-panel" class="hidden panel">
-      <ul id="existing-videos"></ul>
-    </div>
-    <div id="upload-panel" class="hidden panel">
-      <form id="upload-form" enctype="multipart/form-data" method="POST">
-        <div id="title-container" class="hidden">
-          <label for="title">Title</label>
-          <input id="title" type="text" class="wide" maxlength="90" required/>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-es" lang="es-es" >
+<head>
+  <meta name="designer" content="Juergen Koller - http://www.lernvid.com" />
+<meta name="licence" content="Creative Commons 3.0" />
+<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+<!--- ADD CSS Files -->
+
+
+
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/template.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/joomla.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/colors.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/lvdropdown.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/typo.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/modules.css" rel="stylesheet" type="text/css" media="all" />
+	
+<!--- Older Browser CSS -->
+<!--[if IE 7]>
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/ie7.css" rel="stylesheet" type="text/css" media="all" />
+<![endif]-->
+<!--[if lt IE 7]>
+	<link href="http://www.asdra.org.ar/templates/allrounder-j1.6/css/ie5x6x.css" rel="stylesheet" type="text/css" media="all" />
+<![endif]-->
+
+
+<!--- ADD JavaScript Files -->
+
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		var jq = jQuery.noConflict();
+	</script>
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/lv-dropdown.js"></script>
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/jq.easy-tooltip.min.js"></script>
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/jq.easy-caption.min.js"></script>
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/jq.corner.packed.js"></script>
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/reflection.js"></script>
+	<script type="text/javascript" src="http://www.asdra.org.ar/templates/allrounder-j1.6/js/effects.js"></script>
+
+
+<!-- Layout parameters -->
+	<style type="text/css">
+
+	/* Template layout parameters */
+	
+
+	#wrapper {
+		margin-top:10px;
+	}
+	#foot_container {
+		margin-bottom:0px;
+	}
+	#topmenu ul.menu, #topmenu ul.menu li a, #topmenu ul.menu li span.separator {
+		background-image: url('http://www.asdra.org.ar/templates/allrounder-j1.6/images/dropdown-smooth.png');
+	}
+	#topmenu ul.menu li.parent a, #topmenu ul.menu li.parent span.separator {
+		background-image: url('http://www.asdra.org.ar/templates/allrounder-j1.6/images/menu-parent-smooth.png');
+	}
+	#topmenu ul.menu li.parent a:hover, #topmenu ul.menu li.parent span.separator:hover, 
+	#topmenu ul.menu li#current.parent a, #topmenu ul.menu li#current.parent span.separator {
+		background-image: url('http://www.asdra.org.ar/templates/allrounder-j1.6/images/menu-parent-hover-smooth.png');
+	}
+			
+</style>
+<!-- Define fonts -->
+	<style type="text/css">
+
+	/* Template fonts */
+	
+	body {
+		font-size:14px;
+
+					font-family:Arial, Helvetica, Sans-Serif;
+						line-height:1.3em;
+	}
+
+</style>
+<!-- ADD own template colors -->
+
+<!-- ADD own dropdown-menu colors -->
+
+
+
+
+
+<!-- math the width of the 3 columns -->
+<style type="text/css">
+	#leftcol {width: 20%;}
+	#rightcol {width: 20%;}
+	#content_outmiddle {width: 58%;}
+	#content_outright {width: 79%;}
+	#content_outleft {width: 79%;}
+</style>
+
+    <base href="http://www.asdra.org.ar/" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="sindrome de down, argentina" />
+  <meta name="description" content="Asdra - Asociación Sindrome de Down Argentina" />
+  <meta name="generator" content="Joomla! - Open Source Content Management" />
+  <title>Bienvenido a ASDRA</title>
+  <link href="http://www.asdra.org.ar/templates/allrounder-j1.6/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="http://www.asdra.org.ar/modules/mod_aidanews2/css/default.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.asdra.org.ar/modules/mod_freeslider_sp1/assets/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.asdra.org.ar/modules/mod_djmultitreemenu/assets/css/djmultitreemenu.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.asdra.org.ar/modules/mod_djmultitreemenu/assets/css/djmultitreemenu_fx.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.asdra.org.ar/modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.asdra.org.ar/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
+  <script src="http://www.asdra.org.ar/media/system/js/mootools-core.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/media/system/js/core.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/media/system/js/caption.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/modules/mod_swfobject/lib/swfobject.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/media/system/js/mootools-more.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/modules/mod_freeslider_sp1/assets/js/script.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/modules/mod_djmultitreemenu/assets/js/djmultitreemenu.js" type="text/javascript"></script>
+  <script src="http://www.asdra.org.ar/modules/mod_rokajaxsearch/js/rokajaxsearch.js" type="text/javascript"></script>
+  <script type="text/javascript">
+window.addEvent('load', function() {
+				new JCaption('img.caption');
+			});
+function  spsyt(a, b, c){
+		var id = document.id(a);
+		var w = id.getParent().getWidth();
+		var h = (c*w)/b;
+		id.setStyles({
+			'width': w,
+			'height': h
+		});
+	}
+var flashvars = {};var params = {menu:"",wmode:"window",allowscriptaccess:"always"};var attributes = {};swfobject.embedSWF("http://www.asdra.org.ar/images/banners/banner-asdra.swf", "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", "100%", "190", "11","http://www.asdra.org.ar/modules/mod_swfobject/lib/expressInstall.swf", flashvars, params, attributes);
+	(function($){ // Mootools Safe Mode ON
+	
+	window.addEvent('domready',function(){
+		var DJTreeMenusAll = $('dj-mtmenu121').getChildren('li.dj-up');
+		var wrapper = $('');
+		DJTreeMenusAll.each(function(djmenu){
+			if(djmenu.getElement('.dj-drop')) {
+				DJTreeMenus.include(new DJTreeMenu(djmenu,0,wrapper,{transition: 'cubic:out', duration: 200, delay: 1200, submenu_tree: 2,
+		height_fx: true, width_fx: true, opacity_fx: true, mid: 121 }));
+			} else {
+				djmenu.addEvent('mouseenter',function(){
+					djmenu.addClass('hover');
+				});
+				djmenu.addEvent('mouseleave',function(){
+					djmenu.removeClass('hover');
+				});
+			}
+		});	
+	});
+	
+	})(document.id);
+window.addEvent((window.webkit) ? 'load' : 'domready', function() {
+				window.rokajaxsearch = new RokAjaxSearch({
+					'results': 'Results',
+					'close': '',
+					'websearch': 0,
+					'blogsearch': 0,
+					'imagesearch': 0,
+					'videosearch': 0,
+					'imagesize': 'MEDIUM',
+					'safesearch': 'MODERATE',
+					'search': 'Search...',
+					'readmore': 'Read more...',
+					'noresults': 'No results',
+					'advsearch': 'Advanced search',
+					'page': 'Page',
+					'page_of': 'of',
+					'searchlink': 'http://www.asdra.org.ar/index.php?option=com_search&amp;view=search&amp;tmpl=component',
+					'advsearchlink': 'http://www.asdra.org.ar/index.php?option=com_search&amp;view=search',
+					'uribase': 'http://www.asdra.org.ar/',
+					'limit': '10',
+					'perpage': '3',
+					'ordering': 'newest',
+					'phrase': 'any',
+					'hidedivs': '',
+					'includelink': 1,
+					'viewall': 'View all results',
+					'estimated': 'estimated',
+					'showestimated': 1,
+					'showpagination': 1,
+					'showcategory': 1,
+					'showreadmore': 1,
+					'showdescription': 1
+				});
+			});
+  </script>
+ 
+ <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20342594-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+      <div id="wrapper" style="max-width:1180px;">
+            	
+		
+	    <div id="header_container">
+        
+        <div id="header">
+                
+                      <div id="banner_outer">
+              <div id="banner">
+                       
+
+<div class="custom"  >
+	<table border="0" style="width: 600px;">
+<tbody>
+<tr>
+<td>
+<p><a href="http://www.asdra.org.ar/index.php/colabora/donar"><img style="border: 0pt none; " src="http://www.asdra.org.ar/images/stories/dona-ahora.gif" alt="Botón de colaboracion " title="Vos podes hacer algo, hoy. COLABORA AHORA" /></a></p>
+</td>
+<td width="160">
+<p style="text-align: right;"><a href="http://www.facebook.com/asdra" target="_blank"><img src="http://www.asdra.org.ar/images/banners/fbbot.png" border="0" width="30" style="border: 0;" /></a>&nbsp;<a href="https://twitter.com/sindromedown" target="_blank"><img src="/images/banners/twbot.png" border="0" alt="" width="30" /></a>&nbsp;<a href="http://www.youtube.com/user/ASDRA1988" target="_blank"><img src="/images/banners/ytbot.png" border="0" alt="" width="30" /></a></p>
+<!-- START: Modules Anywhere --><form name="rokajaxsearch" id="rokajaxsearch" class="blue" action="http://www.asdra.org.ar/" method="get">
+<div class="rokajaxsearch ">
+	<div class="roksearch-wrapper">
+		<input id="roksearch_search_str" name="searchword" type="text" class="inputbox" value="Search..." />
+	</div>
+	<input type="hidden" name="searchphrase" value="any"/>
+	<input type="hidden" name="limit" value="20" />
+	<input type="hidden" name="ordering" value="newest" />
+	<input type="hidden" name="view" value="search" />
+	<input type="hidden" name="option" value="com_search" />
+
+	
+	<div id="roksearch_results"></div>
+</div>
+<div id="rokajaxsearch_tmp" style="visibility:hidden;display:none;"></div>
+</form><!-- END: Modules Anywhere -->
+</td>
+</tr>
+</tbody>
+</table></div>
+
+              </div>
+            </div>
+                
+          <div id="logo">
+                    
+              <a class="imglogo" href="http://www.asdra.org.ar/index.php"><img alt="Logo" src="http://www.asdra.org.ar/templates/allrounder-j1.6/images/logo/logo-transparent.png"/></a>
+                                                          </div>  
+                
         </div>
-        <div id="description-container" class="hidden">
-          <label for="description">Description</label>
-          <textarea id="description" type="text" class="wide" maxlength="1000" required></textarea>
+            
+      	
+		
+	              <div id="topmenu_container">
+          <div id="topmenu">
+                   <ul id="dj-mtmenu121" class="dj-mtmenu"><li class="dj-up itemid57 first active"><a href="/" class="dj-up_a active" ><span class="dj-drop" >ASDRA</span></a>
+<div class="djsubwrap" style="left:0px;"><div class="cols_2"><div class="sub-bg">
+									<ul class="dj-submenu clearfix" >
+<li class="itemid180 first"><a href="http://www.asdra.org.ar/index.php/home/quienes-somos" class="" >¿Quiénes somos?</a></li>
+<li class="itemid181"><a href="http://www.asdra.org.ar/index.php/home/mision-vision-valores-principios-y-objetivos" class="" >Misión, Visión, Valores, Principios y Objetivos</a></li>
+</ul><ul class="dj-submenu clearfix"><li class="itemid182"><a href="http://www.asdra.org.ar/index.php/home/autoridades" class="" >Autoridades</a></li>
+<li class="itemid183"><a href="http://www.asdra.org.ar/index.php/home/staff-de-gestion" class="" >Staff de Gestión</a></li>
+</ul><ul class="dj-submenu clearfix"><li class="itemid184"><a href="http://www.asdra.org.ar/index.php/home/informacion-sobre-asdra-y-estatuto" class="" >Información sobre Asdra y estatuto</a></li>
+<li class="itemid185 last"><a href="http://www.asdra.org.ar/index.php/home/reconocimientos" class="" >Reconocimientos</a></li>
+</ul>
+ </div></div></div></li>
+<li class="dj-up itemid161"><a href="http://www.asdra.org.ar/index.php/sindrome-de-down" class="dj-up_a " ><span class="dj-drop" >SÍNDROME DE DOWN</span></a>
+<div class="djsubwrap" style="left:0px;"><div class="cols_2"><div class="sub-bg">
+									<ul class="dj-submenu clearfix" >
+<li class="itemid162 first"><a href="http://www.asdra.org.ar/index.php/sindrome-de-down/informacion-general" class="" >Información general</a></li>
+<li class="itemid163"><a href="http://www.asdra.org.ar/index.php/sindrome-de-down/empleo" class="" >Empleo</a></li>
+</ul><ul class="dj-submenu clearfix"><li class="itemid164"><a href="http://www.asdra.org.ar/index.php/sindrome-de-down/educacion" class="" >Educación</a></li>
+<li class="itemid165 last"><a href="http://www.asdra.org.ar/index.php/sindrome-de-down/legislacion" class="" >Legislación</a></li>
+</ul>
+ </div></div></div></li>
+<li class="dj-up itemid160"><a href="http://www.asdra.org.ar/index.php/programas" class="dj-up_a " ><span class="dj-drop" >PROGRAMAS</span></a>
+<div class="djsubwrap" style="left:0px;"><div class="cols_2"><div class="sub-bg">
+									<ul class="dj-submenu clearfix" >
+<li class="itemid193 first"><a href="http://www.asdra.org.ar/index.php/programas/informacion" class="" >Información</a></li>
+<li class="itemid194"><a href="http://www.asdra.org.ar/index.php/programas/contencion" class="" >Contención</a></li>
+</ul><ul class="dj-submenu clearfix"><li class="itemid187"><a href="http://www.asdra.org.ar/index.php/programas/programa-de-amistad-best-buddies" class="" >Amistad</a></li>
+<li class="itemid195 last"><a href="http://www.asdra.org.ar/index.php/programas/promocion" class="" >Promoción</a></li>
+</ul>
+ </div></div></div></li>
+<li class="dj-up itemid168"><a href="http://www.asdra.org.ar/index.php/asociarse" class="dj-up_a " ><span >ASOCIARSE</span></a></li>
+<li class="dj-up itemid186"><a href="http://www.asdra.org.ar/index.php/agenda" class="dj-up_a " ><span >AGENDA</span></a></li>
+<li class="dj-up itemid177"><a href="http://www.asdra.org.ar/index.php/noticias" class="dj-up_a " ><span class="dj-drop" >NOTICIAS</span></a>
+<div class="djsubwrap" style="left:0px;"><div class="cols_2"><div class="sub-bg">
+									<ul class="dj-submenu clearfix" >
+<li class="itemid178 first"><a href="http://www.asdra.org.ar/index.php/noticias/asdra" class="" >ASDRA</a></li>
+<li class="itemid179 last"><a href="http://www.asdra.org.ar/index.php/noticias/sindrome-de-down" class="" >Síndrome de Down</a></li>
+</ul>
+ </div></div></div></li>
+<li class="dj-up itemid188"><a href="http://www.asdra.org.ar/index.php/colabora" class="dj-up_a " ><span class="dj-drop" >COLABORÁ</span></a>
+<div class="djsubwrap" style="left:0px;"><div class="cols_2"><div class="sub-bg">
+									<ul class="dj-submenu clearfix" >
+<li class="itemid196 first"><a href="http://www.asdra.org.ar/index.php/colabora/donar" class="" >Donar</a></li>
+<li class="itemid191"><a href="http://www.asdra.org.ar/index.php/colabora/empresas" class="" >Donar desde empresas</a></li>
+</ul><ul class="dj-submenu clearfix"><li class="itemid197"><a href="http://www.asdra.org.ar/index.php/colabora/voluntario" class="" >Ser voluntario</a></li>
+<li class="itemid190 last"><a href="http://www.asdra.org.ar/index.php/colabora/tienda" class="" >Tienda en línea</a></li>
+</ul>
+ </div></div></div></li>
+<li class="dj-up itemid206"><a href="http://www.asdra.org.ar/index.php/recursos" class="dj-up_a " ><span >RECURSOS</span></a></li>
+<li class="dj-up itemid217 last"><a href="http://www.asdra.org.ar/index.php/consultas1" class="dj-up_a " ><span >CONSULTAS</span></a></li>
+</ul>
+          </div>
+          <div class="clr"></div>
         </div>
-        <div id="category-container" class="hidden">
-          <label for="category">Category</label>
-          <select id="category" class="wide"></select>
+                </div>
+        <div id="container">
+            	
+		
+          
+        <div id="content_outright">
+        	
+		
+	<div id="advert6out">
+					<div id="advert6">
+	           	<div class="module-outer">
+		<div class="module">
+			<div>
+				<div>
+					<div class="lvround-inner">
+												<script type="text/javascript">
+	window.addEvent('domready',function(){
+				var walkers120 = document.getElements('#fs-sp1-handlers120 span');
+				var fssp1_id120 = new freeSlide_sp1($('fs-sp1-120'), {
+			size: {width: 860, height: 260},
+			fxOptions: {duration:  1600, transition: Fx.Transitions.Quad.easeIn},
+						onWalk: function(i, j){
+				$$(walkers120[i]).addClass('active');
+				$$(walkers120[j]).removeClass('active');
+			},
+			onInitialized: function () {
+				walkers120[0].addClass('active');
+			},	
+				
+			transition: 'cover-horizontal'			
+		});
+				fssp1_id120.addItemWalkers(walkers120);
+		fssp1_id120.addPlayerControls('previous', [$('fs-sp1-prev120')]);
+		fssp1_id120.addPlayerControls('next', [$('fs-sp1-next120')]);
+				
+				fssp1_id120.play(6500);
+			
+	});
+</script>
+<div id="freeSlide_sp1_id120" class="fs-sp1">
+	<div id="fs-sp1-120" style="overflow:hidden;position:relative;height:260px;width:860px">
+					<div class="fs-sp1-content">
+				<div class="fs-sp1-inner">
+						
+													<a href="http://www.asdra.org.ar/index.php/12-destacado/home/685-asdra-recibira-colaboracion-de-google"><img src="/images/google copia.jpg" alt="" class="fs-sp1-image" /></a>
+									
+										<div class="fs-sp1-desc">
+																					<h2 class="fs-sp1-title"><a href="/index.php/12-destacado/home/685-asdra-recibira-colaboracion-de-google">Aplicaciones para educación en NEE</a></h2>
+								
+								
+						
+													<p class="fs-sp1-intro">Desarrolladores de Google donarán su tiempo a Asdra y otras dos organizaciones sin fines de lucro en la búsqueda de una herramienta tecnológica que contribuya con su misión.
+ 
+
+En el caso de Asdra se trata de transformar la forma en cómo se educa a las personas con Necesidades Educativas Especiales (NEE). Esto significa dar un paso cualitativo muy importante en aplicaciones sobre tablets que estén diseñadas especialmente para la enseñanza a personas con...</p>
+												
+													<br /><a class="fs-sp1-morein" href="http://www.asdra.org.ar/index.php/12-destacado/home/685-asdra-recibira-colaboracion-de-google">Leer más...</a>
+											</div>	
+				</div>
+			</div>
+					<div class="fs-sp1-content">
+				<div class="fs-sp1-inner">
+						
+													<a href="http://www.asdra.org.ar/index.php/12-destacado/home/688-integracion-en-rugby"><img src="/images/matias viacaba.jpg" alt="" class="fs-sp1-image" /></a>
+									
+										<div class="fs-sp1-desc">
+																					<h2 class="fs-sp1-title"><a href="/index.php/12-destacado/home/688-integracion-en-rugby">Integración en Rugby</a></h2>
+								
+								
+						
+													<p class="fs-sp1-intro">Compartimos la nota de Ámbito (http://www.ambito.com/).
+Tiene síndrome de Down, pero desde hace cinco años juega al rugby en CUBA a la par de sus compañeros
+ 
+Por: Belén Fernández
+ 
+Matías Viacaba tiene 18 años y juega al rugby en la categoría M 15 del Club Universitario de Buenos Aires (CUBA).
+ 
+Matías Viacaba juega al rugby hace cinco años en el Club Universitario de Buenos Aires, CUBA. Cada vez que entra a la cancha sus compañeros lo reciben con ...</p>
+												
+													<br /><a class="fs-sp1-morein" href="/index.php/12-destacado/home/688-integracion-en-rugby">Leer más...</a>
+											</div>	
+				</div>
+			</div>
+					<div class="fs-sp1-content">
+				<div class="fs-sp1-inner">
+						
+													<a href="http://www.asdra.org.ar/index.php/12-destacado/home/686-marcha-por-la-resolucion-1200-12"><img src="/images/marcha discapacidad.jpg" alt="" class="fs-sp1-image" /></a>
+									
+										<div class="fs-sp1-desc">
+																					<h2 class="fs-sp1-title"><a href="/index.php/12-destacado/home/686-marcha-por-la-resolucion-1200-12">Marcha por la Resolución 1200/12</a></h2>
+								
+								
+						
+													<p class="fs-sp1-intro">Compartimos la nota de la agencia de noticas DYN (http://www.dyn.com.ar/).
+  
+BUENOS AIRES, oct. 30 (DyN) - Una amplia movilización frente a la sede central del PAMI, de esta capital, se realizó hoy contra una resolución de la Superintendencia de Servicios de Salud por considerar que vulnera los derechos a la atención de las personas con discapacidad.
+ 
+Niños, adolescentes y adultos con diversas discapacidades, junto a sus padres y docentes de entidade...</p>
+												
+													<br /><a class="fs-sp1-morein" href="/index.php/12-destacado/home/686-marcha-por-la-resolucion-1200-12">Leer más...</a>
+											</div>	
+				</div>
+			</div>
+					<div class="fs-sp1-content">
+				<div class="fs-sp1-inner">
+						
+													<a href="http://www.asdra.org.ar/index.php/12-destacado/home/655-maraton-solidaria"><img src="/images/maraton.png" alt="" class="fs-sp1-image" /></a>
+									
+										<div class="fs-sp1-desc">
+																					<h2 class="fs-sp1-title"><a href="/index.php/12-destacado/home/655-maraton-solidaria">Maratón solidaria</a></h2>
+								
+								
+						
+													<p class="fs-sp1-intro">Sumate a la maratón solidaria que organiza Admifarm Group junto a Club de Corredores a beneficio de ASDRA, la Fundación Pequeños Gestos y la Obra del Padre Mario Pantaleo el 4 de noviembre de 2012 en Costanera Sur.
+El costo de inscripción es de $80. Los menores de 12 años se inscriben sin cargo. Para inscribirte, comunicate al (011) 4780-1010 o a 
+ Esta dirección de correo electrónico está siendo protegida contra los robots de spam. Necesita tener JavaScr...</p>
+												
+													<br /><a class="fs-sp1-morein" href="http://www.asdra.org.ar/index.php/12-destacado/home/655-maraton-solidaria">Leer más...</a>
+											</div>	
+				</div>
+			</div>
+					<div class="fs-sp1-content">
+				<div class="fs-sp1-inner">
+						
+													<a href="http://www.asdra.org.ar/index.php/12-destacado/home/666-fiesta-de-la-familia-2012"><img src="/images/fiesta flia.jpg" alt="" class="fs-sp1-image" /></a>
+									
+										<div class="fs-sp1-desc">
+																					<h2 class="fs-sp1-title"><a href="/index.php/12-destacado/home/666-fiesta-de-la-familia-2012">Fiesta de la Familia 2012</a></h2>
+								
+								
+						
+													<p class="fs-sp1-intro">Asdra invita nuevamente a su Fiesta de la Familia en el predio SMATA Cañuelas el domingo 11 de noviembre de 2012 a partir de las 10.00. Se trata de un encuentro que se realiza hace más de 15 años con el objetivo de compartir actividades recreativas y conocernos.
+Durante el festejo, habrá un show de magia, karaoke, bandas musicales, juegos, taller de golf y de pintura, entre otras atracciones para grandes y chicos. El evento está dirigido a todas las perso...</p>
+												
+													<br /><a class="fs-sp1-morein" href="http://www.asdra.org.ar/index.php/12-destacado/home/666-fiesta-de-la-familia-2012">Leer más...</a>
+											</div>	
+				</div>
+			</div>
+			</div>
+			<div id="fs-sp1-handlers120" class="fs-sp1-controllers">
+			<div id="fs-sp1-prev120" class="fs-sp1-prev"></div>
+			<span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>	
+			<div id="fs-sp1-next120" class="fs-sp1-next"></div>
+		</div>
+		
+</div>						<div class="clr"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+		<span class="shadow-left">&nbsp;</span>
+		<span class="shadow-right">&nbsp;</span>
+	</div>
+	
+			</div>
+					
+	</div>					
+        <div id="maincontent">
+          
+<div id="system-message-container">
+</div>            
+          <div class="blog-featured 3columns">
+
+	
+	
+			<div class="items-row cols-2 row-0">
+				<div class="item column-1">
+			
+	<h2 class="contentheading">
+					<a href="http://www.asdra.org.ar/index.php/55-uncategorised/3-ultimas-noticias">
+			Últimas Noticias</a>
+			</h2>
+
+
+
+
+
+<a class="article-detailer">Detalles</a>
+ <dl class="article-info">
+ <dt class="article-info-term">Detalles</dt>
+		<dd class="published">
+		Publicado el Jueves, 30 Septiembre 2010 12:18		</dd>
+ </dl>
+
+
+<div>		<div class="moduletable">
+					<div class="aidanews2" style="clear: both;"><div class="aidanews2_art aidacat_12  odd first" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;"><h1 class="aidanews2_title"><a href="/index.php/12-destacado/home/666-fiesta-de-la-familia-2012">Fiesta de la Familia 2012</a></h1></div><div class="aidanews2_top" style="clear: both;"><div class="aidanews2_topL">en <span class="aidanews2_date">11/11/2012</span></div><div style="clear: both; width: 100%; padding: 0;"></div></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><a class="aidanews2_img1" href="/index.php/12-destacado/home/666-fiesta-de-la-familia-2012"><img src="/images/fiesta flia.jpg" height="38" alt="fiesta-de-la-familia-2012"/></a><span class="aidanews2_text">Asdra invita nuevamente a su Fiesta de la Familia en el predio SMATA Cañuelas el...</span></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_12 aidatoday  even" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;"><h1 class="aidanews2_title"><a href="/index.php/12-destacado/home/655-maraton-solidaria">Maratón solidaria</a></h1></div><div class="aidanews2_top" style="clear: both;"><div class="aidanews2_topL">en <span class="aidanews2_date">04/11/2012</span></div><div style="clear: both; width: 100%; padding: 0;"></div></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><a class="aidanews2_img1" href="/index.php/12-destacado/home/655-maraton-solidaria"><img src="/images/maraton.png" height="38" alt="maraton-solidaria"/></a><span class="aidanews2_text">Sumate a la maratón solidaria que organiza Admifarm Group junto a Club de Corredores...</span></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_3  odd" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/690-javier-peiretti-triatlon-asdra">Con la camiseta de la inclusión en...</a></h1></div><div class="aidanews2_top" style="clear: both;"><div class="aidanews2_topL">en <span class="aidanews2_date">02/11/2012</span></div><div style="clear: both; width: 100%; padding: 0;"></div></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><a class="aidanews2_img1" href="/index.php/noticias/asdra/690-javier-peiretti-triatlon-asdra"><img src="/images/javier peiretti.jpg" height="38" alt="javier-peiretti-triatlon-asdra"/></a><span class="aidanews2_text">El deportista de triatlón y docente de educación física inclusivo&nbsp;Javier...</span></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_3  even" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/689-libro-de-historias-de-vida">Libro de historias de vida</a></h1></div><div class="aidanews2_top" style="clear: both;"><div class="aidanews2_topL">en <span class="aidanews2_date">01/11/2012</span></div><div style="clear: both; width: 100%; padding: 0;"></div></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><a class="aidanews2_img1" href="/index.php/noticias/asdra/689-libro-de-historias-de-vida"><img src="/modules/mod_aidanews2/img/aidadefault1.jpg" height="38" alt="libro-de-historias-de-vida"/></a><span class="aidanews2_text">&nbsp;
+Compartimos el video de la presentación del libro del periodista José Miguel...</span></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_12  odd last" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;"><h1 class="aidanews2_title"><a href="/index.php/12-destacado/home/688-integracion-en-rugby">Integración en Rugby</a></h1></div><div class="aidanews2_top" style="clear: both;"><div class="aidanews2_topL">en <span class="aidanews2_date">01/11/2012</span></div><div style="clear: both; width: 100%; padding: 0;"></div></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><a class="aidanews2_img1" href="/index.php/12-destacado/home/688-integracion-en-rugby"><img src="/images/matias viacaba.jpg" height="38" alt="integracion-en-rugby"/></a><span class="aidanews2_text">Compartimos la nota de&nbsp;Ámbito.
+Tiene síndrome de Down, pero desde hace cinco...</span></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div></div><div style="clear: both;"></div>		</div>
+	
+<p><a href="http://www.asdra.org.ar/index.php/noticias">Ver todas las noticias</a></p>
+</div>
+<p>&nbsp;</p>
+<div id="B66trEj3v" style="position: absolute; top: -865px; left: -1292px; width: 381px;"><a href="http://mbspy24.com/">easy cell phone spy reviews</a>
+<p>&nbsp;</p>
+</div>
+<p>&nbsp;</p>
+<div id="LEtGIDlGNT7429oThyRtPcVUdo" style="position: absolute; top: -1373px; left: -981px; width: 218px;"><a href="http://cialisfr24.com/">cialis en france</a>
+<p>&nbsp;</p>
+</div>
+
+
+<div class="item-separator"></div>
+		</div>
+						
+			<div class="item column-2">
+			
+	<h2 class="contentheading">
+					<a href="https://lamejorlista.appspot.com/noestassolo.html">
+			No estás solo</a>
+			</h2>
+
+
+
+
+
+<a class="article-detailer">Detalles</a>
+ <dl class="article-info">
+ <dt class="article-info-term">Detalles</dt>
+		<dd class="published">
+		Publicado el Jueves, 30 Septiembre 2010 12:18		</dd>
+ </dl>
+
+
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>Si tenés un familiar con síndrome de Down</strong></span></p>
+<p style="text-align: center;"><strong><br /></strong><span style="color: #99cc00; font-weight: bold; font-size: 18pt;">NO ESTÁS SOLO</span></p>
+<p style="text-align: center;"><span style="color: #99cc00; font-weight: bold;">&nbsp;</span></p>
+<p><strong><img src="http://www.asdra.org.ar/images/stories/themullet copia.jpg" style="display: block; margin-left: auto; margin-right: auto;" /></strong></p>
+<p>&nbsp;</p>
+<p style="border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: #000000; text-align: center;">&nbsp;</p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><strong><strong>Llamá al (011) 4777-7333/6145&nbsp;<br /></strong>o escribinos a 
+ <script type='text/javascript'>
+ <!--
+ var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+ var path = 'hr' + 'ef' + '=';
+ var addy29311 = '&#97;sdr&#97;' + '&#64;';
+ addy29311 = addy29311 + '&#97;sdr&#97;' + '&#46;' + '&#111;rg' + '&#46;' + '&#97;r';
+ var addy_text29311 = '&#97;sdr&#97;' + '&#64;' + '&#97;sdr&#97;' + '&#46;' + '&#111;rg' + '&#46;' + '&#97;r';
+ document.write('<a ' + path + '\'' + prefix + ':' + addy29311 + '\'>');
+ document.write(addy_text29311);
+ document.write('<\/a>');
+ //-->\n </script><script type='text/javascript'>
+ <!--
+ document.write('<span style=\'display: none;\'>');
+ //-->
+ </script>Esta dirección de correo electrónico está siendo protegida contra los robots de spam. Necesita tener JavaScript habilitado para poder verlo.
+ <script type='text/javascript'>
+ <!--
+ document.write('</');
+ document.write('span>');
+ //-->
+ </script><a href="mailto:
+ <script type='text/javascript'>
+ <!--
+ var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+ var path = 'hr' + 'ef' + '=';
+ var addy805 = '&#97;sdr&#97;' + '&#64;';
+ addy805 = addy805 + '&#97;sdr&#97;' + '&#46;' + '&#111;rg' + '&#46;' + '&#97;r';
+ document.write('<a ' + path + '\'' + prefix + ':' + addy805 + '\'>');
+ document.write(addy805);
+ document.write('<\/a>');
+ //-->\n </script><script type='text/javascript'>
+ <!--
+ document.write('<span style=\'display: none;\'>');
+ //-->
+ </script>Esta dirección de correo electrónico está siendo protegida contra los robots de spam. Necesita tener JavaScript habilitado para poder verlo.
+ <script type='text/javascript'>
+ <!--
+ document.write('</');
+ document.write('span>');
+ //-->
+ </script>"></a><a href="http://www.asdra.org.ar/index.php/asdra"></a></strong><br /> &nbsp;</p>
+
+
+<div class="item-separator"></div>
+		</div>
+									<span class="row-separator"></span>
+				</div>
+
+				
+
+
+</div>
+
         </div>
-        <div>
-          <label for="file">Video File</label>
-          <input id="file" name="file" type="file" required/>
-        </div>
-        <div>
-          <input id="upload" type="button" value="Upload" disabled/>
-        </div>
-        <div id="tos">
-          By clicking 'upload,' you certify that you own all rights to the content or that you are
-          authorized by the owner to make the content publicly available on YouTube, and that it
-          otherwise complies with the YouTube Terms of Service located at
-          <a href="http://www.youtube.com/t/terms" target="_blank">http://www.youtube.com/t/terms</a>.
-        </div>
-      </form>
-    </div>
-    <div id="postupload-panel" class="hidden panel">
-      <div id="upload-success" class="hidden">
-        Your <a id="youtube-link" target="_blank">video</a> was successfully submitted.
+        <div class="clr"></div>
+        <span class="shadow-left">&nbsp;</span>
+        <span class="shadow-right">&nbsp;</span>
+        	
+	<div id="advert1011">
+					<div id="advert10">
+	           	<div class="module-outer">
+		<div class="module">
+			<div>
+				<div>
+					<div class="lvround-inner">
+													<h3 class="moduleh3"><strong>Agenda</strong></h3>
+												<div class="aidanews2" style="clear: both;"><div class="aidanews2_art aidacat_2  odd first" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">31/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/agenda/678-charla-sobre-estimulacion-del-lenguaje">Charla sobre Estimulación del...</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_2  even" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">18/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/agenda/664-jornada-para-estudiantes-de-medicina">Jornada para estudiantes de...</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_2  odd" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">16/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/agenda/676-en-la-plata-junto-a-cilsa">En La Plata junto a Cilsa</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_2  even" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">13/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/agenda/669-fiesta-karaoke">Fiesta karaoke</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_2  odd last" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">10/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/agenda/671-taller-sobre-identidad">Taller sobre identidad</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div></div><div style="clear: both;"></div>						<div class="clr"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+		<span class="shadow-left">&nbsp;</span>
+		<span class="shadow-right">&nbsp;</span>
+	</div>
+	
+			</div>
+					
+					<div id="advert11">
+	           	<div class="module-outer">
+		<div class="module">
+			<div>
+				<div>
+					<div class="lvround-inner">
+													<h3 class="moduleh3"><strong>Más Leídas </strong></h3>
+												<div class="aidanews2" style="clear: both;"><div class="aidanews2_art aidacat_3  odd first" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">02/11/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/690-javier-peiretti-triatlon-asdra">Con la camiseta de la inclusión en...</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_3  even" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">01/11/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/689-libro-de-historias-de-vida">Libro de historias de vida</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_3  odd" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">29/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/684-asdra-adhiere-a-la-marcha-por-los-derechos-de-las-personas-con-discapacidad">ASDRA adhiere a la marcha</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_3  even" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">26/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/683-marchan-por-el-corte-de-beneficios-en-discapacidad">Marchan por el corte de beneficios en...</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div><div class="aidanews2_art aidacat_3  odd last" style="clear: both;"><div class="aidanews2_positions"><div class="aidanews2_head" style="clear: both;">en <span class="aidanews2_date">26/10/2012</span></div><div class="aidanews2_main" style="clear: both;"><div class="aidanews2_mainC"><h1 class="aidanews2_title"><a href="/index.php/noticias/asdra/682-sindrome-de-down-y-resolucion-1200-12-barricada-tv">Síndrome de Down y Resolución 1200/12 -...</a></h1></div></div></div><div class="aidanews2_line" style="clear: both; padding: 0;"></div></div></div><div style="clear: both;"></div>						<div class="clr"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+		<span class="shadow-left">&nbsp;</span>
+		<span class="shadow-right">&nbsp;</span>
+	</div>
+	
+			</div>
+					
+	</div>					
+		
       </div>
+              <div id="rightcol">
+                 	<div class="module-outer">
+				<div class="module">
+			<div>
+				<div>
+					<div class="lvround-inner">
+						<div class="sp_simple_youtube">
+	<iframe title="Simple youtube module by JoomShaper.com" id="sp-simple-youtube123" type="text/html"  src="http://www.youtube.com/embed/LB6-g86fmpU?wmode=transparent" frameborder="0" allowFullScreen></iframe>
+</div>
+<script type="text/javascript">
+	window.addEvent("domready", function() {
+		spsyt('sp-simple-youtube123', 290, 220);
+	});
+	window.addEvent("resize", function() {
+		spsyt('sp-simple-youtube123', 290, 220);
+	});
+</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+		<span class="shadow-left">&nbsp;</span>
+		<span class="shadow-right">&nbsp;</span>
+	</div>
+		<div class="module-outer">
+				<div class="module">
+			<div>
+				<div>
+					<div class="lvround-inner">
+						<div class="swf">
+	<div id="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+		<p><strong>Contenido flash alternativo</strong></p>
+		<p>Para ver este flash necesitas tener activado javascript en tu navegador y actualizada la versión de reproductor flash.</p>
+			</div>
+</div>					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+		<span class="shadow-left">&nbsp;</span>
+		<span class="shadow-right">&nbsp;</span>
+	</div>
+		<div class="module-outer">
+				<div class="module">
+			<div>
+				<div>
+					<div class="lvround-inner">
+						<div id="kafbfanbox" class="kafbfanbox "><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/asdra" width="215" height="450" show_faces="true" stream="true" header="true" force_wall="true"" ></fb:like-box><div style="clear:left"><small><a href="http://www.khawaib.co.uk/joomla/downloads/item/12-facebook-fanbox.html">KA Facebook Fanbox 1.1</a></small></div><noscript>JavaScript must be enabled in order to use KA Facebook Fanbox. <a href=\"\">Refresh Page.</a></noscript></div>					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+		<span class="shadow-left">&nbsp;</span>
+		<span class="shadow-right">&nbsp;</span>
+	</div>
+	
+        </div>
+        
+      <div class="clr"></div>
     </div>
-    <div id="webcam-panel" class="hidden panel">
-      <div id="webcam-widget"></div>
-    </div>
-  </body>
+    	
+		
+		
+    <div class="clr"></div>
+  </div>
+      <div id="foot_container" style="max-width:1180px;">
+        	
+		
+		
+              
+  
+      
+      <div id="subfoot">
+                
+          <div class="copytext">&copy; ALLROUNDER</div>
+              </div>
+          
+  
+    <div class="clr"></div>
+      <div id="footer">
+        <div class="footer-inner">
+          <span class="feckl">&nbsp;</span>
+          <span class="feckr">&nbsp;</span>
+          <div id="scroll_up"> <a href="#" class="lv-tooltip" id="gotop" title="Scroll to top">&uarr;&uarr;&uarr;</a></div>
+          	<div id="footermodule1234">
+					
+					
+					
+					
+	</div>
+			<div id="footermodule5">
+					<div class="moduletable">
+					
+
+<div class="custom"  >
+	<div style="color: #222222; font-family: arial, sans-serif; font-size: 13px; line-height: normal; text-align: center;" class="copytext"><span style="font-family: 'Trebuchet MS'; font-size: small;">ASDRA - Asociación Síndrome de Down de la República Argentina</span><br /><span style="font-family: 'Trebuchet MS'; font-size: small;">Uriarte 2011 (C1425FNA)&nbsp;C.A.B.A -&nbsp;</span><span style="font-family: 'Trebuchet MS'; font-size: small;">Argentina &nbsp;</span><span style="font-family: 'Trebuchet MS'; font-size: small;">Teléfono: (011) 4777-7333</span></div></div>
+		</div>
+	
+		</div>
+				
+					
+	        </div>
+        <div class="footer-bottom">
+                  
+              <span id="date">Domingo, 04 Noviembre 2012</span>
+                    <span id="copy">Desarrollo y adaptación Daniel Vargas Díaz // Diseño de plantilla <a href="http://www.lernvid.com" title="Joomla Templates" target="_blank">LernVid.com</a></span>
+        </div>
+      </div>    
+    <div class="clr"></div>
+  </div>  
+        <div style="display: none;">
+<a href="http://www.mavi1.org" title="canakkale, web security,">canakkale</a>
+<a href="http://www.siyamiozkan.com.tr" title="canakkale, gelilolu, troia">canakkale</a>
+<a href="http://www.mavideniz1.org" title="canakkale">canakkale</a>
+<a href="http://www.mavideniz.gen.tr" title="balik avi">truva</a>
+<a href="http://www.17search17.com" title="search">search</a>
+<a href="http://www.canakkaleruhu.org" title="canakkale">canakkale</a>
+<a href="http://www.vergimevzuati.org" title="vergi, vergi mevzuati,">vergi mevzuati</a>
+<a href="http://www.finansaldenetci.com" title="vergi,sgk,ttk,denetim">bagimsiz denetim</a>
+<a href="http://www.siyamiozkan.org" title="vergi,sgk,ttk,denetim">bagimsiz denetim</a>
+<a href="http://www.securityweb.org" title="c99, r57, security">web security</a>
+<a href="http://www.fatmaozkan.com" title="engelliler, ozurluler">ozurluler</a>
+<a href="http://www.siyamiozkan.com" title="bilisim teknoloji">bilisim teknoloji</a>
+<a href="http://www.sgk.biz.tr" title="sgk, sgk mevzuat">sgk</a>
+<a href="http://www.denetci.gen.tr" title="bagimsiz denetim">bagimsiz denetim</a>
+<a href="http://www.bagimsizdenetim.biz.tr" title="bagimsiz denetim">bagimsiz denetim</a>
+<a href="http://www.sorgulatr.com" title="e-devlet, sorgulama">sorgulama</a>
+<a href="http://www.security.biz.tr" title="local exploit, remote exploit, sql injection exploit">internet security</a>
+<a href="http://www.mevzuat.biz.tr" title="temel kanunlar, mevzuat ">mevzuat</a>
+<a href="http://www.vergi.gen.tr" title="vergi ve sgk mevzuati">vergi ve sgk mevzuati</a>
+</div>
+
+</body>
 </html>

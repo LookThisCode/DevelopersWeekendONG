@@ -1,0 +1,11 @@
+Este proyecto es una adaptacion de Youtube Direct Lite:
+
+http://code.google.com/p/youtube-direct-lite/
+
+Donde se traducen los textos de botones, etiquetas y mensajes a español, pra su facil adpocion por parte de usuarios de LATAM.
+
+Ademas se haces modificaciones particulas para la ONG que lo va a utilizar, ASDRA www.asdra.org.ar, en las hojas de estilos, y nombres de paginas.
+
+Las componentes de Youtube Direct Lite de este proyecto se encuentran desplegadas en:
+
+http://lamejorlista.appspot.com/

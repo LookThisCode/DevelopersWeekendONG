@@ -17,11 +17,11 @@
 define({
   // REQUIRED
   // See http://code.google.com/p/google-api-javascript-client/wiki/Authentication for instructions on registering for OAuth 2.
-  OAUTH2_CLIENT_ID: '',
+  OAUTH2_CLIENT_ID: '1096332107948.apps.googleusercontent.com',
 
   // REQUIRED
   // Register at https://code.google.com/apis/youtube/dashboard/gwt/index.html to get your own key.
-  DEVELOPER_KEY: ''
+  DEVELOPER_KEY: 'AI39si6bmSWD-rJ3b2ELmeiAxnkUYSUZT9EoRr9hmmyHvzV6uPD_3rlbBKUhl-MrYerR31jXxe04MDlgJlEsFf-Z-7m3zXAESQ'
 
   // If you'd like to enable Google Analytics statistics to your YouTube Direct Lite instance,
   // register for a Google Analytics account and enter your id code below.

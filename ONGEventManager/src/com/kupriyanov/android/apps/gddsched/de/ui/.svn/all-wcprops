@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui
+END
+TrackDetailActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/TrackDetailActivity.java
+END
+TracksActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/TracksActivity.java
+END
+NotesActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/NotesActivity.java
+END
+HomeActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/HomeActivity.java
+END
+ScheduleActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/ScheduleActivity.java
+END
+StarredActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/StarredActivity.java
+END
+SearchActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/SearchActivity.java
+END
+SessionDetailActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/SessionDetailActivity.java
+END
+SessionsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/SessionsActivity.java
+END
+CountdownWidget.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/CountdownWidget.java
+END
+NoteEditActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/NoteEditActivity.java
+END
+MapActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/MapActivity.java
+END
+BlocksActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/BlocksActivity.java
+END
+CountdownWidgetByAlarm.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/CountdownWidgetByAlarm.java
+END
+VendorsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/VendorsActivity.java
+END
+VendorDetailActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/5/trunk/src/com/kupriyanov/android/apps/gddsched/de/ui/VendorDetailActivity.java
+END

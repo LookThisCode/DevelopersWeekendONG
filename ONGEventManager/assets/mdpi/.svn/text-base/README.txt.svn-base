@@ -1,0 +1,1 @@
+Template for the Icon was taken on http://lab.iirojappinen.com/idroid/

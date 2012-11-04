@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">Asdra - YoAprendo</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_asdra">Asdra - Yo Aprendo</string>
+    <string name="version_name">1.0.0</string>
+    <string name="loading">Espere mientras carga...</string>
+
+</resources>

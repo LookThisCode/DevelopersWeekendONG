@@ -1,0 +1,94 @@
+<!doctype HTML>
+<html manifest="/cache.manifest">
+<head>
+
+<meta charset='utf-8'> 
+
+<title>Juego de memoria</title>
+
+<link rel="stylesheet" href="css/jquery.fancybox.css?v=2.1.3" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/memogame.js"></script>
+<script type="text/javascript" src="js/jquery.fancybox.pack.js?v=2.1.3"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var game = new MemoGame;
+	    game.init();
+
+		$('#start-button').click(function(){
+			game.start_game();
+			return false;
+		});
+
+		$('#reset-button').click(function(){
+			game.reset_game();
+			$.fancybox.close();
+			return false;
+		});
+
+		$('#replay-button').click(function(){
+			game.replay_game();
+			$.fancybox.close();
+			return false;
+		});
+
+		$('#next-button').click(function(){
+			game.next_level();
+			$.fancybox.close();
+			return false;
+		});
+
+		$('.cover').click(function(t){
+			game.choice(t);
+			return false;
+		});
+
+		$(window).bind('hashchange', function() {
+			game.change_level(window.location.hash)
+		});
+	});
+</script>
+
+
+</head>
+<body>
+	<h1>Juego de memoria</h1>
+	<div class="row-object">
+		<div class="box position-left">
+			<div><a href=""><img class="cover" src="img/cover.jpg" id="cover-1" alt="" /></a></div>
+			<div><img class="object" id="object-1" alt="No se pudo cargar la imagen." /></div>
+		</div>
+		<div class="box position-right">
+			<a href=""><img class="cover" src="img/cover.jpg" id="cover-2" alt="" /></a>
+			<img class="object" id="object-2" alt="No se pudo cargar la imagen." />
+		</div>
+	</div>
+	<div class="row-object">
+		<div class="box position-left">
+			<a href=""><img class="cover" src="img/cover.jpg" id="cover-3" alt="" /></a>
+			<img class="object" id="object-3" alt="No se pudo cargar la imagen." />
+		</div>
+		<div class="box position-right">
+			<a href=""><img class="cover" src="img/cover.jpg" id="cover-4" alt="" /></a>
+			<img class="object" id="object-4" alt="No se pudo cargar la imagen." />
+		</div>
+	</div>
+
+	<div id="game-controls">
+		<a href="" id="start-button" class="button"><div><span>Comenzar!</span></div></a>
+
+		<img src="" id="random-object" alt="" />
+	</div>
+
+	<div id="congratulations">
+		<p></p>
+		<a href="" id="reset-button" class="button"><div><span>Reiniciar el juego</span></div></a>
+		<a href="" id="replay-button" class="button"><div><span>Repetir nivel</span></div></a>
+		<a href="" id="next-button" class="button"><div><span>Siguiente nivel</span></div></a>
+	</div>
+
+</body>
+</html>

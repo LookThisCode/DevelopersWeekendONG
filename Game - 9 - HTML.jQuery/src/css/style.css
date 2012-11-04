@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+}
+
+body {
+    background: url('../img/bg.jpg');
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h1 {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, .7);
+    color: #ff5c00;
+}
+.box {
+    margin-top: 5%;
+}
+
+.object {
+    z-index: -1;
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    display: inline-block;
+}
+
+.cover {
+    display: none;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    position: relative;
+    float: left;
+    -moz-box-shadow:    3px 3px 5px 2px rgba(0,0,0,.3);
+    -webkit-box-shadow: 3px 3px 5px 2px rgba(0,0,0,.3);
+    box-shadow:         3px 3px 5px 2px rgba(0,0,0,.3);
+}
+
+.row-object {
+    margin: 0 auto;
+    display: block;
+    clear: both;
+}
+.position-left {
+    float: left;
+    margin-left: 10%;
+}
+.position-right {
+    float: right;
+    margin-right: 10%;
+}
+
+.box img, #random-object {
+    width: 250px;
+    height: 250px;
+    border-radius:25px;
+    -moz-border-radius:25px;
+}
+
+#game-controls {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
+    text-align: center;
+}
+
+.button, .button:visited {
+    background: #222 url(overlay.png) repeat-x; 
+    display: inline-block; 
+    /*padding: 5px 10px 6px; */
+    color: #fff; 
+    text-decoration: none;
+    -moz-border-radius: 6px; 
+    -webkit-border-radius: 6px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    position: relative;
+    cursor: pointer
+    font-size: 14px; 
+    padding: 8px 14px 9px;
+    background-color: #ff5c00;
+    display: block;
+    text-align: center;
+}
+
+.button:hover { 
+    background-color: #d45500; 
+    color: #fff; 
+}
+.button:active { 
+    top: 1px; 
+}
+
+
+#random-object {
+    margin-top: 15px;
+    display: none;
+}
+
+#congratulations {
+    display: none;
+    padding: 25px;
+    min-height: 400px;
+}
+
+#congratulations p {
+    color: #139236;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#congratulations a {
+    margin-top: 15px;
+}

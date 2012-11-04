@@ -5,7 +5,6 @@ import java.io.IOException;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
 
 /**
  * 
@@ -23,7 +22,7 @@ public class YoAprendoModel {
 	private String resumen;
 	private Bitmap imagen;
 	private String sonidoURL;
-	private MediaPlayer sonido;
+	private MediaPlayer sonido, localMP;
 
 	/**
 	 * MŽtodo constructor para iniciar los valores.
@@ -40,8 +39,10 @@ public class YoAprendoModel {
 		this.resumen = resumen;
 		this.sonidoURL = sonidoURL;
 		this.imagen = null;
+		localMP = null;
 		sonido = new MediaPlayer();
 		sonido.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		prepareSound();
 	}
 
 	public String getId() {
@@ -77,11 +78,7 @@ public class YoAprendoModel {
 	}
 
 	public MediaPlayer getSonido() {
-		return sonido;
-	}
-
-	public void setSonido(MediaPlayer sonido) {
-		this.sonido = sonido;
+		return localMP;
 	}
 
 	/**
@@ -90,7 +87,11 @@ public class YoAprendoModel {
 	 * optimiza mucho la memoria.
 	 */
 	public void playSound() {
-		sonido.reset();
+		localMP = sonido;
+		localMP.start();
+	}
+
+	private void prepareSound() {
 
 		try {
 			sonido.setDataSource(sonidoURL);
@@ -105,23 +106,7 @@ public class YoAprendoModel {
 		}
 
 		sonido.setLooping(false);
-
-		try {
-			sonido.prepare();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		sonido.setOnPreparedListener(new OnPreparedListener() {
-
-			@Override
-			public void onPrepared(MediaPlayer mp) {
-				mp.start();
-			}
-		});
-
+		sonido.prepareAsync();
 	}
 
 }

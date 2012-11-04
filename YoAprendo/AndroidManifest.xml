@@ -16,14 +16,18 @@
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         <activity
             android:name=".SplashActivity"
-            android:label="@string/title_activity_asdra" >
+            android:label="@string/title_activity_asdra"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AsdraActivity" >
+        <activity
+            android:name=".AsdraActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

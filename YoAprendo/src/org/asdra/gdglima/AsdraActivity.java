@@ -178,9 +178,6 @@ public class AsdraActivity extends BaseActivity implements OnClickListener {
 
 				currentIndex = 0;
 
-				prgDialog.hide();
-				prgDialog.dismiss();
-
 				setData();
 
 				imgFigura.setOnClickListener(AsdraActivity.this);
@@ -193,6 +190,9 @@ public class AsdraActivity extends BaseActivity implements OnClickListener {
 
 				((ImageButton) findViewById(R.id.btnNext))
 						.setOnClickListener(AsdraActivity.this);
+
+				prgDialog.hide();
+				prgDialog.dismiss();
 
 			}
 			return false;
@@ -248,8 +248,10 @@ public class AsdraActivity extends BaseActivity implements OnClickListener {
 	private void pararSonidos() {
 		if (listaYoAprendo != null && !listaYoAprendo.isEmpty()) {
 			for (YoAprendoModel obj : listaYoAprendo) {
-				if (obj.getSonido().isPlaying()) {
+				if (obj.getSonido() != null && obj.getSonido().isPlaying()) {
+					obj.getSonido().pause();
 					obj.getSonido().stop();
+					obj.getSonido().prepareAsync();
 				}
 			}
 		}

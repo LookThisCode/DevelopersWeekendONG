@@ -34,7 +34,7 @@ public class AsdraActivity extends BaseActivity implements OnClickListener {
 	private ImageView imgFigura = null;
 	private TextView tvTitle = null;
 
-	private static final String URL_DATA = "http://carlospinan.com/proyectos/yoaprendo/data.json";
+	private static final String URL_DATA = "http://yoaprendo.hansyschmitt.com/data.json";
 	private List<YoAprendoModel> listaYoAprendo = null;
 	private ProgressDialog prgDialog = null;
 	private int currentIndex = -1;
@@ -249,7 +249,6 @@ public class AsdraActivity extends BaseActivity implements OnClickListener {
 		if (listaYoAprendo != null && !listaYoAprendo.isEmpty()) {
 			for (YoAprendoModel obj : listaYoAprendo) {
 				if (obj.getSonido() != null && obj.getSonido().isPlaying()) {
-					obj.getSonido().pause();
 					obj.getSonido().stop();
 					obj.getSonido().prepareAsync();
 				}

@@ -55,9 +55,12 @@ function MemoGame() {
 				$('#congratulations p').html('¡Excelente!<br /> Has superado el nivel.');
 				$('#next-button').show();
 			}
-			
 
-			$.fancybox($('#congratulations'));
+			$.fancybox($('#congratulations'),{
+				'closeBtn':false, 
+				'modal' : true
+			});
+			
 		} else {
 			setTimeout(function(){
 				$('#'+id).show();
